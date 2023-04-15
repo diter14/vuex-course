@@ -4,7 +4,11 @@ const debug = process.env.NODE_ENV !== "production";
 
 export default createStore({
   state() {
-    return {};
+    return {
+      categories: [],
+      message: "Hello from store",
+      showMessage: false,
+    };
   },
   actions: {},
   mutations: {},
