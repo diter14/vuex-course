@@ -8,6 +8,7 @@ const state = () => {
 
 const getters = {
   getMessage: (state) => state.message,
+  getShowMessage: (state) => state.showMessage,
 };
 
 const actions = {
@@ -23,6 +24,7 @@ const mutations = {
 };
 
 export default {
+  namespaced: true,
   state,
   getters,
   actions,

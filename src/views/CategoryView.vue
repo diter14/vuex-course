@@ -19,14 +19,14 @@ export default {
 
     return {
       vMessage,
-      showMessage: computed(() => store.state.showMessage),
-      message: computed(() => store.getters.getMessage), // Es una buena práctica acceder a la información del state mediante getters, no se recomienda acceder de forma directa
+      showMessage: computed(() => store.getters["categories/getShowMessage"]),
+      message: computed(() => store.getters["categories/getMessage"]), // Es una buena práctica acceder a la información del state mediante getters, no se recomienda acceder de forma directa
       messageReversed: computed(() =>
-        store.getters.getMessage.split("").reverse().join("")
+        store.getters["categories/getMessage"].split("").reverse().join("")
       ),
       setMessage: () => {
         // store.commit("setMessage", vMessage.value); // No es buena práctica mutar los valores del state directamente. Es mejor usar actions mediante el método "dispatch"
-        store.dispatch("setMessage", vMessage.value);
+        store.dispatch("categories/setMessage", vMessage.value);
       },
     };
   },
