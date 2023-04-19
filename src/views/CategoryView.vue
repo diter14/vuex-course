@@ -5,6 +5,7 @@
     <button @click="setMessage">Update message</button>
     <br />
     <p v-if="showMessage">{{ message }}</p>
+    <p>Mensaje invertido: {{ messageReversed }}</p>
   </div>
 </template>
 <script>
@@ -19,7 +20,10 @@ export default {
     return {
       vMessage,
       showMessage: computed(() => store.state.showMessage),
-      message: computed(() => store.state.message),
+      message: computed(() => store.getters.getMessage), // Es una buena práctica acceder a la información del state mediante getters, no se recomienda acceder de forma directa
+      messageReversed: computed(() =>
+        store.getters.getMessage.split("").reverse().join("")
+      ),
       setMessage: () => {
         // store.commit("setMessage", vMessage.value); // No es buena práctica mutar los valores del state directamente. Es mejor usar actions mediante el método "dispatch"
         store.dispatch("setMessage", vMessage.value);

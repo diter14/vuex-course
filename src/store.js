@@ -7,8 +7,11 @@ export default createStore({
     return {
       categories: [],
       message: "Hello from store",
-      showMessage: false,
+      showMessage: true,
     };
+  },
+  getters: {
+    getMessage: (state) => state.message,
   },
   actions: {
     setMessage: ({ commit }, message) => {
