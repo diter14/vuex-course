@@ -21,7 +21,8 @@ export default {
       showMessage: computed(() => store.state.showMessage),
       message: computed(() => store.state.message),
       setMessage: () => {
-        store.commit("setMessage", vMessage.value);
+        // store.commit("setMessage", vMessage.value); // No es buena práctica mutar los valores del state directamente. Es mejor usar actions mediante el método "dispatch"
+        store.dispatch("setMessage", vMessage.value);
       },
     };
   },

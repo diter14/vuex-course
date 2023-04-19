@@ -10,9 +10,13 @@ export default createStore({
       showMessage: false,
     };
   },
-  actions: {},
+  actions: {
+    setMessage: ({ commit }, message) => {
+      commit("SET_MESSAGE", message);
+    },
+  },
   mutations: {
-    setMessage: (state, message) => {
+    SET_MESSAGE: (state, message) => {
       state.message = message;
     },
   },
