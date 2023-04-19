@@ -9,8 +9,8 @@ const routes = [
     component: HomeView,
   },
   {
-    path: "/categorias",
-    name: "categorias",
+    path: "/categories",
+    name: "categories",
     component: CategoryView,
   },
   {

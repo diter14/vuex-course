@@ -11,6 +11,10 @@ export default createStore({
     };
   },
   actions: {},
-  mutations: {},
+  mutations: {
+    setMessage: (state, message) => {
+      state.message = message;
+    },
+  },
   plugins: debug ? [createLogger()] : [],
 });
