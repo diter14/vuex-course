@@ -4,7 +4,7 @@
     <input v-model="vMessage" type="text" />
     <button @click="setMessage">Update message</button>
     <br />
-    <p v-if="showMessage">{{ message }}</p>
+    <p>{{ message }}</p>
     <p>Mensaje invertido: {{ messageReversed }}</p>
   </div>
 </template>
