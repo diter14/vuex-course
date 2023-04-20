@@ -1,5 +1,5 @@
 import { createStore, createLogger } from "vuex";
-import categories from "./store/categories";
+import categories from "./modules/categories";
 
 const debug = process.env.NODE_ENV !== "production";
 

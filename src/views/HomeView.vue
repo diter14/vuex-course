@@ -20,7 +20,7 @@ export default {
     const store = useStore();
 
     return {
-      storeMessage: computed(() => store.state.message),
+      storeMessage: computed(() => store.getters["categories/getMessage"]),
     };
   },
 };
