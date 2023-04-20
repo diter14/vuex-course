@@ -1,12 +1,15 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link> |
-    <router-link to="/categories">Categories</router-link>
-  </nav>
+  <MainHeader />
   <router-view />
 </template>
-
+<script>
+import MainHeader from "@/layouts/MainHeader.vue";
+export default {
+  components: {
+    MainHeader,
+  },
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
