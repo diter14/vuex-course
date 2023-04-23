@@ -1,5 +1,5 @@
 <template>
-  <form>
+  <form class="box">
     <div class="field">
       <label class="label">Título</label>
       <div class="control">

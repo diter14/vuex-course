@@ -6,16 +6,19 @@
       :loading="isLoading"
       :handle-submit="createCategory"
     />
+    <CategoryList :category-list="categoryList" />
   </div>
 </template>
 <script>
 import CategoryForm from "@/components/category/CategoryForm.vue";
+import CategoryList from "@/components/category/CategoryList.vue";
 import { useStore } from "vuex";
 import { computed, onMounted, reactive } from "vue";
 
 export default {
   components: {
     CategoryForm,
+    CategoryList,
   },
   setup() {
     // Reactive variables
@@ -35,6 +38,9 @@ export default {
     const isLoading = computed(() => {
       return store.getters["categories/getCategoryLoadingRequest"];
     });
+    const categoryList = computed(() => {
+      return store.getters["categories/getCategories"];
+    });
 
     // Methods
     const createCategory = () => {
@@ -51,6 +57,7 @@ export default {
 
     return {
       categoryForm,
+      categoryList,
       createCategory,
       isLoading,
     };

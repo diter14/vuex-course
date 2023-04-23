@@ -14,7 +14,7 @@ export default {
 </script>
 <style>
 #app {
-  font-family: "Poppins", Arial, sans-serif;
+  font-family: "DM Sans", Arial, sans-serif;
   color: #2c3e50;
 }
 
