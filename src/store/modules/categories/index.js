@@ -7,6 +7,12 @@ const state = () => {
     categories: [],
     message: "Hello from store",
     showMessage: true,
+    categoryRequest: {
+      loading: false,
+      error: false,
+      message: "",
+      id: null,
+    },
   };
 };
 
