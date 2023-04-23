@@ -1,3 +1,4 @@
+import { initializeApp } from "firebase/app";
 import {
   FIREBASE_API_KEY,
   FIREBASE_APP_ID,
@@ -6,7 +7,6 @@ import {
   FIREBASE_PROJECTID,
   FIREBASE_STORAGEBUCKET,
 } from "@/utils/constants";
-import { initializeApp } from "firebase";
 
 const firebaseConfig = {
   apiKey: FIREBASE_API_KEY,
