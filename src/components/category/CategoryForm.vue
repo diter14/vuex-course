@@ -1,5 +1,5 @@
 <template>
-  <form action="">
+  <form>
     <div class="field">
       <label class="label">Título</label>
       <div class="control">
@@ -29,7 +29,9 @@
     </div>
     <div class="field is-grouped">
       <div class="control">
-        <button class="button is-link">Guardar</button>
+        <button class="button is-link" @click.prevent="createCategory()">
+          Guardar
+        </button>
       </div>
       <div class="control">
         <button class="button is-link is-light">Cancelar</button>
@@ -39,16 +41,27 @@
 </template>
 <script>
 import { ref } from "vue";
+import { useStore } from "vuex";
 export default {
   setup() {
+    const store = useStore();
     const title = ref("");
     const description = ref("");
     const type = ref("");
+
+    const createCategory = () => {
+      store.dispatch("categories/createCategory", {
+        title: title.value,
+        description: description.value,
+        type: type.value,
+      });
+    };
 
     return {
       title,
       description,
       type,
+      createCategory,
     };
   },
 };
