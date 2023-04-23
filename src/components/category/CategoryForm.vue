@@ -1,4 +1,9 @@
 <template>
+  <ul>
+    <li v-for="category in categories" :key="category.id">
+      {{ `${category.type} | ${category.title}` }}
+    </li>
+  </ul>
   <form>
     <div class="field">
       <label class="label">Título</label>
@@ -53,9 +58,12 @@ export default {
     const title = ref("");
     const description = ref("");
     const type = ref("");
-
     const isLoading = computed(() => {
       return store.getters["categories/getCategoryLoadingRequest"];
+    });
+    store.dispatch("categories/fetchCategories");
+    const categories = computed(() => {
+      return store.getters["categories/getCategories"];
     });
 
     const createCategory = () => {
@@ -73,6 +81,7 @@ export default {
       title,
       description,
       type,
+      categories,
       createCategory,
       isLoading,
     };
