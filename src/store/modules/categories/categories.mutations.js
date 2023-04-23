@@ -17,7 +17,7 @@ const CREATE_CATEGORY_ERROR = (state, error) => {
 
 const CREATE_CATEGORY_SUCCESS = (state, categoryCreatedId) => {
   state.categoryRequest.loading = false;
-  state.categoryRequest.error = true;
+  state.categoryRequest.error = false;
   state.categoryRequest.message = "";
   state.categoryRequest.id = categoryCreatedId;
 };
