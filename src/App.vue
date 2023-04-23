@@ -1,6 +1,8 @@
 <template>
   <MainHeader />
-  <router-view />
+  <main class="container">
+    <router-view />
+  </main>
 </template>
 <script>
 import MainHeader from "@/layouts/MainHeader.vue";
