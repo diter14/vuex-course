@@ -1,21 +1,21 @@
 <template>
-  <ul>
-    <li v-for="category in categories" :key="category.id">
-      {{ `${category.type} | ${category.title}` }}
-    </li>
-  </ul>
   <form>
     <div class="field">
       <label class="label">Título</label>
       <div class="control">
-        <input v-model="title" class="input" type="text" placeholder="Título" />
+        <input
+          v-model="category.title"
+          class="input"
+          type="text"
+          placeholder="Título"
+        />
       </div>
     </div>
     <div class="field">
       <label class="label">Descripción</label>
       <div class="control">
         <textarea
-          v-model="description"
+          v-model="category.description"
           class="textarea"
           cols="30"
           rows="10"
@@ -24,17 +24,22 @@
     </div>
     <div class="field">
       <label class="radio">
-        <input v-model="type" type="radio" name="type" value="gasto" />
+        <input v-model="category.type" type="radio" name="type" value="gasto" />
         Gasto
       </label>
       <label class="radio">
-        <input v-model="type" type="radio" name="type" value="ingreso" />
+        <input
+          v-model="category.type"
+          type="radio"
+          name="type"
+          value="ingreso"
+        />
         Ingreso
       </label>
     </div>
     <div class="field is-grouped">
       <div class="control">
-        <button class="button is-link" @click.prevent="createCategory()">
+        <button class="button is-link" @click.prevent="submit()">
           Guardar
         </button>
       </div>
@@ -50,40 +55,24 @@
   </form>
 </template>
 <script>
-import { computed, ref } from "vue";
-import { useStore } from "vuex";
+import { toRefs } from "vue";
 export default {
-  setup() {
-    const store = useStore();
-    const title = ref("");
-    const description = ref("");
-    const type = ref("");
-    const isLoading = computed(() => {
-      return store.getters["categories/getCategoryLoadingRequest"];
-    });
-    store.dispatch("categories/fetchCategories");
-    const categories = computed(() => {
-      return store.getters["categories/getCategories"];
-    });
-
-    const createCategory = () => {
-      store.dispatch("categories/createCategory", {
-        title: title.value,
-        description: description.value,
-        type: type.value,
-      });
-      title.value = "";
-      description.value = "";
-      type.value = "";
-    };
+  props: {
+    categoryForm: {
+      title: String,
+      description: String,
+      type: String,
+    },
+    handleSubmit: Function,
+    loading: Boolean,
+  },
+  setup(props) {
+    const { categoryForm, handleSubmit, loading } = toRefs(props);
 
     return {
-      title,
-      description,
-      type,
-      categories,
-      createCategory,
-      isLoading,
+      category: categoryForm,
+      submit: handleSubmit,
+      isLoading: loading,
     };
   },
 };

@@ -1,22 +1,59 @@
 <template>
   <div>
     <h1 class="is-size-1">Categorias</h1>
-    <CategoryForm />
+    <CategoryForm
+      :category-form="categoryForm"
+      :loading="isLoading"
+      :handle-submit="createCategory"
+    />
   </div>
 </template>
 <script>
 import CategoryForm from "@/components/category/CategoryForm.vue";
-// import { computed, ref } from "vue";
-// import { useStore } from "vuex";
+import { useStore } from "vuex";
+import { computed, onMounted, reactive } from "vue";
 
 export default {
   components: {
     CategoryForm,
   },
   setup() {
-    // const store = useStore();
+    // Reactive variables
+    const store = useStore();
+    const categoryForm = reactive({
+      title: "",
+      description: "",
+      type: "",
+    });
 
-    return {};
+    // Lifeclycle events
+    onMounted(() => {
+      fetchCategories();
+    });
+
+    // Computed properties
+    const isLoading = computed(() => {
+      return store.getters["categories/getCategoryLoadingRequest"];
+    });
+
+    // Methods
+    const createCategory = () => {
+      store.dispatch("categories/createCategory", {
+        title: categoryForm.title,
+        description: categoryForm.description,
+        type: categoryForm.type,
+      });
+    };
+
+    const fetchCategories = () => {
+      store.dispatch("categories/fetchCategories");
+    };
+
+    return {
+      categoryForm,
+      createCategory,
+      isLoading,
+    };
   },
 };
 </script>
