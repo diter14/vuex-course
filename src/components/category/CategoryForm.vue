@@ -37,10 +37,15 @@
         <button class="button is-link is-light">Cancelar</button>
       </div>
     </div>
+    <div v-show="isLoading" class="card">
+      <header class="card-header has-text-centered">
+        <p class="card-header-title has-text-centered">Creando categoría...</p>
+      </header>
+    </div>
   </form>
 </template>
 <script>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import { useStore } from "vuex";
 export default {
   setup() {
@@ -49,12 +54,19 @@ export default {
     const description = ref("");
     const type = ref("");
 
+    const isLoading = computed(() => {
+      return store.getters["categories/getCategoryLoadingRequest"];
+    });
+
     const createCategory = () => {
       store.dispatch("categories/createCategory", {
         title: title.value,
         description: description.value,
         type: type.value,
       });
+      title.value = "";
+      description.value = "";
+      type.value = "";
     };
 
     return {
@@ -62,6 +74,7 @@ export default {
       description,
       type,
       createCategory,
+      isLoading,
     };
   },
 };
