@@ -13,6 +13,7 @@ const createTransaction = async (
   { description, amount, type, category, date }
 ) => {
   try {
+    commit(CREATE_TRANSACTION_REQUEST);
     let transactionCreatedId = await TransactionService.createTransaction({
       description,
       amount,
@@ -20,8 +21,7 @@ const createTransaction = async (
       category,
       date,
     });
-    commit(CREATE_TRANSACTION_REQUEST, transactionCreatedId);
-    commit(CREATE_TRANSACTION_SUCCESS);
+    commit(CREATE_TRANSACTION_SUCCESS, transactionCreatedId);
   } catch (error) {
     commit(CREATE_TRANSACTION_ERROR, error);
   }
