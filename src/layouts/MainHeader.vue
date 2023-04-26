@@ -35,8 +35,11 @@
     >
       <div class="navbar-start">
         <router-link to="/" class="navbar-item">Home</router-link>
-        <router-link to="/categories" class="navbar-item"
-          >Categories</router-link
+        <router-link to="/categorias" class="navbar-item"
+          >Categorias</router-link
+        >
+        <router-link to="/transacciones" class="navbar-item"
+          >Transacciones</router-link
         >
       </div>
 
