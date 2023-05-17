@@ -84,7 +84,6 @@ export default {
     },
     handleSubmit: Function,
     categoriesList: Array,
-    // loading: Boolean,
   },
   setup(props) {
     const { transactionForm, handleSubmit, categoriesList } = toRefs(props);
@@ -96,9 +95,7 @@ export default {
         categorySelected = categoriesList.value.find((category) => {
           return category.id == transactionForm.value.category;
         });
-      }
-      if (categorySelected) {
-        return categorySelected.type;
+        return categorySelected?.type;
       }
       return null;
     });
