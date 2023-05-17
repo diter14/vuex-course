@@ -6,13 +6,13 @@
       :handle-submit="createTransaction"
       :categories-list="categories"
     />
-    <!-- :loading="isLoading" -->
   </div>
 </template>
 <script>
 import TransactionForm from "@/components/transaction/TransactionForm.vue";
 import { useStore } from "vuex";
 import { computed, onMounted, reactive } from "vue";
+import { useRouter } from "vue-router";
 
 export default {
   components: {
@@ -21,6 +21,7 @@ export default {
   setup() {
     // Reactive variables
     const store = useStore();
+    const router = useRouter();
     const transactionForm = reactive({
       description: "",
       amount: 0,
@@ -48,6 +49,7 @@ export default {
         category: transactionForm.category,
         date: transactionForm.date,
       });
+      router.push({ name: "home" });
     };
 
     const fetchCategories = () => {
