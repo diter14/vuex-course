@@ -34,7 +34,7 @@
       :class="toggleMenu ? 'is-active' : ''"
     >
       <div class="navbar-start">
-        <router-link to="/" class="navbar-item">Home</router-link>
+        <router-link to="/" class="navbar-item">Dashboard</router-link>
         <router-link to="/categorias" class="navbar-item"
           >Categorias</router-link
         >

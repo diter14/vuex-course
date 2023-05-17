@@ -1,6 +1,6 @@
 <template>
   <MainHeader />
-  <main class="container">
+  <main class="container py-6">
     <router-view />
   </main>
 </template>
