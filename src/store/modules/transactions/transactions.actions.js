@@ -30,7 +30,7 @@ const createTransaction = async (
 const fetchTransactions = async ({ commit }) => {
   try {
     commit(GET_TRANSACTIONS_REQUEST);
-    let transactions = TransactionService.getTransactions();
+    let transactions = await TransactionService.getTransactions();
     commit(GET_TRANSACTIONS_SUCCESS, transactions);
   } catch (error) {
     commit(GET_TRANSACTIONS_ERROR);
