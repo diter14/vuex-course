@@ -11,14 +11,18 @@
 <script>
 import TransactionForm from "@/components/transaction/TransactionForm.vue";
 import { useStore } from "vuex";
-import { computed, onMounted, reactive } from "vue";
+import { onMounted, reactive } from "vue";
 import { useRouter } from "vue-router";
+import useCategory from "@/composables/useCategory";
 
 export default {
   components: {
     TransactionForm,
   },
   setup() {
+    // Composable
+    const { categoryList: categories, fetchCategories } = useCategory();
+
     // Reactive variables
     const store = useStore();
     const router = useRouter();
@@ -36,9 +40,6 @@ export default {
     });
 
     // Computed properties
-    const categories = computed(() => {
-      return store.getters["categories/getCategories"] || [];
-    });
 
     // Methods
     const createTransaction = () => {
@@ -50,10 +51,6 @@ export default {
         date: transactionForm.date,
       });
       router.push({ name: "home" });
-    };
-
-    const fetchCategories = () => {
-      store.dispatch("categories/fetchCategories");
     };
 
     return {
