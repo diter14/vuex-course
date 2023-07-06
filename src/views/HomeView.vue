@@ -4,6 +4,12 @@
       Saldo: <span class="has-text-primary">{{ saldo }}</span>
     </h1>
   </div>
+  <div class="block is-flex is-justify-content-center">
+    <MainChart :id="'pie-chart'" :data="pieChart"> </MainChart>
+  </div>
+  <div class="block is-flex is-justify-content-center">
+    <MainChart :id="'bar-chart'" :data="barChart"> </MainChart>
+  </div>
   <h2 class="title is-size-2">Transacciones</h2>
   <template v-if="transactions.length == 0">
     <p class="has-text-centered">Obteniendo transacciones ...</p>
@@ -12,7 +18,7 @@
     <table class="table is-striped is-fullwidth">
       <thead>
         <tr>
-          <th>ID</th>
+          <!-- <th>ID</th> -->
           <th>Título</th>
           <th>Monto</th>
           <th>Tipo</th>
@@ -20,7 +26,7 @@
       </thead>
       <tbody>
         <tr v-for="transaction in transactions" :key="transaction.id">
-          <td>{{ transaction.id }}</td>
+          <!-- <td>{{ transaction.id }}</td> -->
           <td>{{ transaction.description }}</td>
           <td>
             {{ transaction.amount * (transaction.type == "gasto" ? -1 : 1) }}
@@ -45,10 +51,11 @@
 // @ is an alias to /src
 import { computed, onMounted } from "vue";
 import { useStore } from "vuex";
+import MainChart from "@/layouts/MainChart.vue";
 
 export default {
   name: "HomeView",
-  components: {},
+  components: { MainChart },
   setup() {
     const store = useStore();
 
@@ -60,8 +67,33 @@ export default {
     const saldo = computed(() => {
       return store.getters["transactions/getSaldo"] || 0;
     });
+    const gastoTotal = computed(() => {
+      return store.getters["transactions/getGastoTotal"];
+    });
+    const ingresoTotal = computed(() => {
+      return store.getters["transactions/getIngresoTotal"];
+    });
     const transactions = computed(() => {
       return store.getters["transactions/getTransactions"] || [];
+    });
+
+    const pieChart = computed(() => {
+      return {
+        type: "pie",
+        columns: [
+          ["gastos", store.getters["transactions/getGastoTotal"]],
+          ["ingresos", store.getters["transactions/getIngresoTotal"]],
+        ],
+      };
+    });
+    const barChart = computed(() => {
+      return {
+        type: "bar",
+        columns: [
+          ["gastos", ...store.getters["transactions/getGastos"]],
+          ["ingresos", ...store.getters["transactions/getIngresos"]],
+        ],
+      };
     });
 
     // Methods
@@ -71,6 +103,10 @@ export default {
 
     return {
       saldo,
+      gastoTotal,
+      ingresoTotal,
+      pieChart,
+      barChart,
       transactions,
     };
   },
