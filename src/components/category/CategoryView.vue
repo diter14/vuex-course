@@ -12,8 +12,10 @@
 <script>
 import CategoryForm from "@/components/category/CategoryForm.vue";
 import CategoryList from "@/components/category/CategoryList.vue";
-import { useStore } from "vuex";
-import { computed, onMounted, reactive } from "vue";
+import useCategory from "@/composables/useCategory";
+// import { useStore } from "vuex";
+// import { computed, onMounted, reactive } from "vue";
+import { onMounted } from "vue";
 
 export default {
   components: {
@@ -21,39 +23,21 @@ export default {
     CategoryList,
   },
   setup() {
+    // Hooks - Composable
+    const {
+      categoryForm,
+      isLoading,
+      categoryList,
+      createCategory,
+      fetchCategories,
+    } = useCategory();
+
     // Reactive variables
-    const store = useStore();
-    const categoryForm = reactive({
-      title: "",
-      description: "",
-      type: "",
-    });
 
     // Lifeclycle events
     onMounted(() => {
       fetchCategories();
     });
-
-    // Computed properties
-    const isLoading = computed(() => {
-      return store.getters["categories/getCategoryLoadingRequest"];
-    });
-    const categoryList = computed(() => {
-      return store.getters["categories/getCategories"];
-    });
-
-    // Methods
-    const createCategory = () => {
-      store.dispatch("categories/createCategory", {
-        title: categoryForm.title,
-        description: categoryForm.description,
-        type: categoryForm.type,
-      });
-    };
-
-    const fetchCategories = () => {
-      store.dispatch("categories/fetchCategories");
-    };
 
     return {
       categoryForm,
