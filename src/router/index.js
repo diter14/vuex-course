@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
 import CategoryView from "../components/category/CategoryView.vue";
-import TransactionView from "../views/TransactionView.vue";
+import TransactionView from "../components/transaction/TransactionView.vue";
 
 const routes = [
   {
