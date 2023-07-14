@@ -32,10 +32,10 @@
 import { toRefs } from "vue";
 export default {
   props: {
-    categoriesList: {
-      type: Function,
-      default() {
-        return [];
+    categoryList: {
+      type: Array,
+      default(rawProps) {
+        return [] || rawProps.categoriesList;
       },
     },
   },
