@@ -31,7 +31,14 @@
 <script>
 import { toRefs } from "vue";
 export default {
-  props: ["categoryList"],
+  props: {
+    categoriesList: {
+      type: Function,
+      default() {
+        return [];
+      },
+    },
+  },
   setup(props) {
     const { categoryList } = toRefs(props);
 

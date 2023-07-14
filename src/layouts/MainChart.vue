@@ -5,7 +5,18 @@
 import c3 from "c3";
 import { onMounted, onUpdated, toRefs } from "vue";
 export default {
-  props: ["id", "data"],
+  props: {
+    id: {
+      type: String,
+      default: "",
+    },
+    data: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+  },
   setup(props) {
     const { id, data } = toRefs(props);
 

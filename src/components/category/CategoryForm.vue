@@ -59,11 +59,21 @@ import { toRefs } from "vue";
 export default {
   props: {
     categoryForm: {
-      title: String,
-      description: String,
-      type: String,
+      type: Object,
+      default(rawProps) {
+        return {
+          title: rawProps.title,
+          description: rawProps.description,
+          type: rawProps.type,
+        };
+      },
     },
-    handleSubmit: Function,
+    handleSubmit: {
+      type: Function,
+      default() {
+        return () => {};
+      },
+    },
     loading: Boolean,
   },
   setup(props) {

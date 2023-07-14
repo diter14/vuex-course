@@ -76,14 +76,29 @@ import { computed, toRefs, watch } from "vue";
 export default {
   props: {
     transactionForm: {
-      description: String,
-      amount: Number,
-      type: String,
-      category: String,
-      date: String,
+      type: Object,
+      default(rawProps) {
+        return {
+          description: rawProps.description,
+          amount: rawProps.amount,
+          type: rawProps.type,
+          category: rawProps.category,
+          date: rawProps.date,
+        };
+      },
     },
-    handleSubmit: Function,
-    categoriesList: Array,
+    handleSubmit: {
+      type: Function,
+      default() {
+        return () => {};
+      },
+    },
+    categoriesList: {
+      type: Function,
+      default() {
+        return [];
+      },
+    },
   },
   setup(props) {
     const { transactionForm, handleSubmit, categoriesList } = toRefs(props);
